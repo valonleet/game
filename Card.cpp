@@ -1,11 +1,11 @@
 #include "Card.h"
 
-GCard::GCard()
+Card::Card()
 {
 
 }
 
-GCard::GCard(std::string name, std::string description, Rarity rarity, Series series, Type type, int value, Color color)
+Card::Card(std::string name, std::string description, Rarity rarity, Series series, Type type, int value, Color color, Meta_Type meta_type)
 {
 	this->name = name;
 	this->description = description;
@@ -14,6 +14,7 @@ GCard::GCard(std::string name, std::string description, Rarity rarity, Series se
 	this->type = type;
 	this->value = value;
 	this->color = color;
+	this->meta_type = meta_type;
 }
 
 std::ifstream& operator>>(std::ifstream& lhs, Card c)

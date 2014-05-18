@@ -21,34 +21,29 @@ public:
 		huehue
 	};
 
+	enum Color
+	{
+		green
+
+	};
+	enum Meta_Type
+	{
+		gcard,
+		ccard
+	};
+
+	Card();
+
+	Card(std::string, std::string, Rarity, Series, Type, int, Color, Meta_Type meta_type);
+
 	std::string name;
 	std::string description;
 	Rarity rarity;
 	Series series;
 	Type type;
-};
-
-class GCard : public Card
-{
-public:
-	enum Color
-	{
-		green
-	};
-
-	GCard();
-	GCard(std::string, std::string, Rarity, Series, Type, int, Color);
-
 	int value;
 	Color color;
-};
-
-std::ostream& operator<<(std::ostream& lhs, Card c);
-std::ifstream& operator>>(std::ifstream& lhs, Card c);
-
-class CCard : Card
-{
-
+	Meta_Type meta_type;
 };
 
 #endif

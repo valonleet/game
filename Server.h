@@ -23,15 +23,11 @@ public:
 	static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 	static int callback_card(void *NotUsed, int argc, char **argv, char **azColName);
 	static int callback_player(void *NotUsed, int argc, char **argv, char **azColName);
-	static int callback_gcard(void *NotUsed, int argc, char **argv, char **azColName);
 
 	static bool add_card_db(Card);
 	static Card get_card_db(std::string);
-
-	static bool add_gcard_db(GCard);
-	static GCard get_gcard_db(std::string);
-	static bool update_gcard_db(GCard);
-	static bool delete_gcard_db(std::string);
+	static bool update_card_db(Card);
+	static bool delete_card_db(std::string);
 
 	static bool add_account_db(std::string, std::string, std::string);
 	static bool update_account_db(std::string, std::string, std::string);

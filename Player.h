@@ -14,14 +14,19 @@ public:
 	static const int DECK_MAX = 12;
 
 	Player();
-	Player(std::string, Card[12], std::list<Card>, int, int);
+
 	std::string username;
 	std::vector<Card> deck;
-	std::list<Card*> collection;	// contains GCards and CCards
+	std::list<Card> collection;	// contains GCards and CCards
 	int points;
 	int rating;
-	bool add_to_collection(Card*);
+
+	bool add_to_collection(Card);
 	bool add_to_deck(Card);
+
+	void print_collection();
+
+	void print_deck();
 };
 
 #endif

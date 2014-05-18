@@ -39,15 +39,34 @@ int main(void)
 	cout << "Please enter your email: ";
 	cin >> email;*/
 
-	Server::add_account_db(username, password, email);
+	//Server::add_account_db(username, password, email);
 
 	Player p = Server::get_player_db(username, password);
 
-	cout << "Sucess!";
+	
+	if (p.username != "")
+	{
+		cout << "Login Sucess!" << endl;
+		cout << "Welcome " + p.username << endl;
 
-	cout << "P username: " + p.username;
+		p.add_to_collection(Server::get_card_db("test1"));
+		p.add_to_collection(Server::get_card_db("test2"));
+		p.add_to_collection(Server::get_card_db("test3"));
 
-	Tools::create_cards_file("series1.pack");
+		p.add_to_deck(Server::get_card_db("test4"));
+		p.add_to_deck(Server::get_card_db("test5"));
+		p.add_to_deck(Server::get_card_db("test6"));
+
+		p.print_collection();
+
+		p.print_deck();
+
+	}
+	else
+	{
+		std::cerr << "invalid login";
+		return -1;
+	}
 
 	char c;
 	cin >> c;
