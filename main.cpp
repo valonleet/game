@@ -49,68 +49,86 @@ int main(void)
 		cout << "Login Sucess!" << endl;
 		cout << "Welcome " + p.username << endl;
 
-		p.add_to_collection(Server::get_card_db("test1"));
-		p.add_to_collection(Server::get_card_db("test2"));
-		p.add_to_collection(Server::get_card_db("test3"));
-
-		p.add_to_deck(Server::get_card_db("test4"));
-		p.add_to_deck(Server::get_card_db("test5"));
-		p.add_to_deck(Server::get_card_db("test6"));
-
 		p.print_collection();
 
 		p.print_deck();
 
+		//Server::update_player_db(p);
+
+		Client localClient;
+
+		RenderWindow main_window(VideoMode(1280, 720, 32), "My window");
+		main_window.setFramerateLimit(60);
+
+		string str;
+		sf::String text;
+
+		sf::Font arial_font;
+
+		if (!arial_font.loadFromFile("fonts/arial.ttf"))
+		{
+			std::cerr << "error loading font";
+		}
+
+		string menu_options_str[] = { "Play", "Deck", "Collection", "Options" };
+
+		int num_options = sizeof(menu_options_str) / sizeof(string);
+
+		sf::Text* menu_options = new sf::Text[num_options];
+
+		for (int i = 0; i < num_options; i++)
+		{
+			menu_options[i].setFont(arial_font);
+			menu_options[i].setString(menu_options_str[i]);
+			menu_options[i].setCharacterSize(20);
+			menu_options[i].setColor(sf::Color::Red);
+		}
+
+		sf::Text test;
+
+		test.setFont(arial_font);
+		test.setString("TEST");
+		test.setCharacterSize(24);
+		test.setColor(sf::Color::Red);
+
+		while (main_window.isOpen())
+		{
+			Event event;
+			while (main_window.pollEvent(event))
+			{
+				switch (event.type)
+				{
+				case Event::Closed:
+					main_window.close();
+					break;
+
+				case Event::TextEntered:
+					if (event.text.unicode < 128)
+					{
+						text += static_cast<char>(event.text.unicode);
+						str += static_cast<char>(event.text.unicode);
+						std::cout << str << std::endl;
+					}
+				}
+
+			}
+
+			main_window.clear(sf::Color::Black);
+
+			for (int i = 0; i < num_options; i++)
+			{
+				main_window.draw(menu_options[i]);
+			}
+
+			main_window.display();
+
+		}
 	}
 	else
 	{
 		std::cerr << "invalid login";
 		return -1;
 	}
-
-	char c;
-	cin >> c;
-
-	/*//Client localClient;
-	/*
-	//send username to server, check if account is in accounts table
-	if (localClient.set_player(Client::send_login(username, password)))
-	{
-		// the login was6 successfull display a menu
-	}
-	else 
-	{
-		cout << "sorry invalid username or password";
-	}*/
-
-	/*RenderWindow main_window(VideoMode(800, 600), "My window");
-	main_window.setFramerateLimit(60);
-
-	string str;
-	sf::String text;
-	
-	while (main_window.isOpen())
-	{
-		Event event;
-		while (main_window.pollEvent(event))
-		{
-			switch (event.type)
-			{
-			case Event::Closed:
-				main_window.close();
-				break;
-
-			case Event::TextEntered:
-				if (event.text.unicode < 128)
-				{
-					text += static_cast<char>(event.text.unicode);
-					str += static_cast<char>(event.text.unicode);
-					std::cout << str << std::endl;
-				}
-			}
-				
-		}
-	}*/
 
 
 	//if so then 

@@ -16,8 +16,3 @@ Card::Card(std::string name, std::string description, Rarity rarity, Series seri
 	this->color = color;
 	this->meta_type = meta_type;
 }
-
-std::ifstream& operator>>(std::ifstream& lhs, Card c)
-{
-	return lhs;
-}

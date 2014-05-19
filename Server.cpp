@@ -64,20 +64,18 @@ int Server::callback_player(void *NotUsed, int argc, char **argv, char **azColNa
 	{
 		if (deck_cards[i] != "")
 		{
-			cout << "CARD NAME: " << deck_cards[i] << std::endl;
-			p->deck[i] = get_card_db(deck_cards[i]);
+			p->deck.push_back(get_card_db(deck_cards[i]));
 		}
 	}
 
 	collection_str = argv[5];
 
-	vector<string> collection_cards = split(deck_str, ';');
+	vector<string> collection_cards = split(collection_str, ';');
 
 	for (vector<string>::size_type i = 0; i < collection_cards.size(); i++)
 	{
 		if (collection_cards[i] != "")
 		{
-			cout << "CARD NAME: " << collection_cards[i] << std::endl;
 			p->collection.push_back(get_card_db(collection_cards[i]));
 		}
 	}
@@ -399,7 +397,7 @@ bool Server::update_player_db(Player p)
 		collection_str += i->name + ";";
 	}
 
-	string sql = "UPDATE " + PLAYER_TABLE + " SET deck='" + deck_str + ", collection='" + collection_str + "', points=" + std::to_string(p.points) + "', rating=" + std::to_string(p.rating) + " WHERE username='" + p.username + "';";
+	string sql = "UPDATE " + PLAYER_TABLE + " SET deck='" + deck_str + "', collection='" + collection_str + "', points=" + std::to_string(p.points) + ", rating=" + std::to_string(p.rating) + " WHERE username='" + p.username + "';";
 
 	sqlite3* db;
 
